@@ -1,33 +1,43 @@
 import sys
+import math
 
 sys.stdin.readline()
 
 for line in sys.stdin:
-# for line in ["6 12", "25 37"]:
     
     line = line.split(" ")
     x, y = int(line[0]), int(line[1])
     
-    num_divisible = 0 # Every 12
-    num_square = 0 # sqrt rounded up
-    num_both = 0 #dont know yet
+    divisible = 0 # Every 12
+    square = 0 # sqrt rounded up
+    both = 0 #dont know yet
+
+    # Handle if divisible by 12
+    if x % 12 == 0:
+        divisible += 1
     
-    #brute force
-    for i in range(x, y + 1):
+    next_twelve = x + (12 - (x % 12))
+    if y >= next_twelve:
+        divisible += ((y - next_twelve) // 12) + 1
         
-        divisible = i % 12 == 0
-        square = int(i ** .5) ** 2 == i
+    # Handle perfect square
+    if int(x ** .5) ** 2 == x:
+        square += 1
         
-        if divisible:
-            num_divisible += 1
-        if square:
-            num_square += 1
-        if divisible and square:
-            num_both += 1
-        
-        
-            
-    print(num_divisible, num_square, num_both)
+    start = int(x ** .5)
+    end = int(y ** .5)
+    
+    square += (end - start)
+    
+    # Handle both
+    if int(x ** .5) ** 2 == x and x % 12 == 0:
+        both += 1
+    
+    next_six = start + (6 - (start % 6))
+    if end >= next_six:
+        both += ((end - next_six) // 6) + 1
+    
+    print(divisible, square, both)
             
             
             
