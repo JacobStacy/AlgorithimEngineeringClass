@@ -12,19 +12,12 @@ for line in stdin.readlines():
     operation = line[0]
     x = int(line[1])
     
+    
+    # Read
     if operation == 'r':
-        try:
-            nums.remove(x)
-            while 1:
-                try:
-                    nums.remove(x)
-                except:
-                    print(statistics.median(nums))
-                    break
-        except:
-            print("Wrong!")
+        pass
+    
+    # Write
     else:
-        nums.append(x)
-        # nums.sort()
-        print(statistics.median(nums))
+        pass
         
