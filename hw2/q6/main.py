@@ -1,6 +1,6 @@
 from sys import stdin
 
-line = stdin.readline().split(" ")
+line = stdin.readline()
 
 files = [0] # 0 place holder to move up index for indexing from 1
 for file in stdin.readline().split(" "):
