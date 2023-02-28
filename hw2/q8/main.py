@@ -17,5 +17,3 @@ for line in stdin.readlines():
     warriors += hives[-1][0] - hives[-1][1]
 
 print(start)
-        
-        
