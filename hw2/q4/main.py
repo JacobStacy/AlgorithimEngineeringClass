@@ -1,27 +1,31 @@
 from sys import stdin
-import math
 
 min = 0
-# max = int(stdin.readline().split(" ")[0]) - 1
-max = 19
+max = int(stdin.readline().split(" ")[0]) - 1
 
-curr_pos = min + math.ceil((max - min) / 2)
-# for line in stdin.readline().split(" "):
-for line in "13 1 11 10 6".split(" "):
-    new_guard = int(line)
-    
-    if new_guard > max or new_guard < min:
-        continue
-    
-    if new_guard >= curr_pos:
-        max = new_guard
-    else:
-        min = new_guard
-    
-    curr_pos = min + math.ceil((max - min) / 2)
-    print(min, curr_pos, max)
-    
-print(max - curr_pos)
+guards = []
+
+for line in stdin.readline().split(" "):
+    guards.append(int(line))
         
+guards.sort()
+
+max_dist = 0
+for i in range(1, len(guards)):
+    dist = guards[i] - guards[i - 1]
     
-    
+    if dist == 1: 
+        dist -= 1
+        
+    dist = dist // 2 
+        
+    if max_dist < dist:
+        max_dist = dist
+
+if guards[0] - min > max_dist:
+    max_dist = guards[0] - min
+
+if max - guards[-1] > max_dist:
+    max_dist = max - guards[-1]
+
+print(max_dist)

@@ -4,7 +4,6 @@ stdin.readline()
 
 labs = {}
 max = -1
-
 for line in stdin.readlines():
     lab_id = int(line)
     
