@@ -1,7 +1,9 @@
 from sys import stdin
 import math
 
-testing = False
+testing = True
+
+
 
 if not testing:
     n_people, k_skills = [int(i) for i in stdin.readline().split(" ")]
@@ -64,34 +66,51 @@ else:
 #         return dont
     
 # print(least_needed(crewmates, set(), 0))
-    
-    
 
-
-min = None
-for i in range(2**len(crewmates)):
-    skills = set()
-    ii = i + 1
+def get_leading_bit(num):
+    return 2**math.floor(math.log2(num))
+    
+def get_mate(num, crewmates):
     j = -1
-    n_included = 0
-    
     while 1:
-        if ii <= 0 or -j > len(crewmates):
+        if num <= 0 or -j > len(crewmates):
             break
         
-        if 1 & ii:
-            skills = skills.union(crewmates[j])
-            n_included += 1
+        if 1 & num:
+            return crewmates[j]
+        
+        num>>=1
+        j-=1
+    
+skills_under_num = {}
+
+min = None
+for i in range(1, 2**len(crewmates) - 1):
+    j = -1
+    skills = set()
+    n_included = 1
+    
+    
+    leading_bit = get_leading_bit(i)  
+    if i == 32768:
+        pass 
+    crewmate = get_mate(leading_bit, crewmates)
+    
+    remaining = i ^ leading_bit
+    
+    if remaining:
+        skills = crewmate.union(skills_under_num[remaining][0])
+        n_included += skills_under_num[remaining][1]
+    else:
+        skills = crewmate
+    
+
+    skills_under_num[i] = (skills, n_included)
+    
+    if len(skills) >= k_skills:
+        if min is None or n_included < min:
+            min = n_included
             
-            
-            if n_included > n_people or n_included >= min:
-                break
-                
-            if len(skills) >= k_skills:
-                if min is None or n_included < min:
-                    min = n_included
-                    
-        j -= 1       
-        ii>>=1
+    
         
 print(min)
