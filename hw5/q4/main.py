@@ -1,7 +1,7 @@
 from sys import stdin
 import heapq
 
-n_sites, m_edges = [int(j) for j in stdin.readline().split(' ')]
+n_sites = int(stdin.readline().split(' ')[0])
 
 conn_map = dict()
 for i in range(n_sites):
@@ -10,7 +10,7 @@ for i in range(n_sites):
 for line in stdin.readlines():
     first, second, cost = [int(j) for j in line.split(' ')]
     
-    conn_map[first].add((cost,second))
+    conn_map[first].add((cost, second))
     conn_map[second].add((cost, first))
 
 
@@ -34,23 +34,3 @@ while len(visited) < n_sites:
             break
             
 print(total)
-                
-            
-            
-        
-        
-
-        
-
-
-
-        
-
-    
-        
-# print(n_clusters)
-    
-
-
-
-
