@@ -1,7 +1,5 @@
+
 from sys import stdin
-
-testing = False
-
 
 conn_map = dict()
 
@@ -14,6 +12,7 @@ for i in range(n_sites):
 for i in range(m_edges):
     first, second = [int(j) for j in lines[i].split(' ')]
     conn_map[first].add(second)
+    conn_map[second].add(first)
 
 def traverse(site, visited):
     
@@ -34,7 +33,4 @@ for site in conn_map:
         
 print(n_clusters)
     
-
-
-
 
