@@ -5,7 +5,6 @@ n_verts, m_edges = [int(x) for x in stdin.readline().split(' ')]
 vert_map = [set() for _ in range(n_verts)]
 
 for i in range(m_edges):
-    
     first, second = [int(x) for x in stdin.readline().split(' ')]
     
     vert_map[first].add(second)
